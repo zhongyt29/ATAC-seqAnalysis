@@ -53,7 +53,7 @@ OUTPUT=${basename}.spike.rmdup.bam \
 METRICS_FILE=${basename}.spike.Picard_Metrics_unfiltered_bam.txt REMOVE_DUPLICATES=true >> ${basename}_ATAC-seq_mapping_summary.txt 2>&1
 perl /share/home/zhongyiting/pipeline/ATAC-seq/code/bam2bed_shift.pl  ${basename}.spike.rmdup.bam 
 nor=$(wc -l ${basename}.spike.rmdup.bed | cut -d ' ' -f 1)
-awk '{printf("%s\t%d\t%d\t%.2f\n",$1,$2,$3,$4*100000000/'${nor}')}' ${basename}.bg > ${basename}.norm.bg
+awk '{printf("%s\t%d\t%d\t%.2f\n",$1,$2,$3,$4*1000000/'${nor}')}' ${basename}.bg > ${basename}.norm.bg
 bedSort ${basename}.norm.bg ${basename}.norm.sort.bg
 bedGraphToBigWig ${basename}.norm.sort.bg /share/Genomes/${assembly}/Sequence/${assembly}.chrom.sizes ${basename}.norm.bw
 
