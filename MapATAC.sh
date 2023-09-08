@@ -73,6 +73,9 @@ echo "Total number of reads in the black list" >> ${basename}_ATAC-seq_mapping_s
 bedtools intersect -a ${basename}.pe.q10.rmdup.bed -b /share/Genomes/${assembly}/Annotation/${assembly}.blacklist.bed -u | wc -l >> ${basename}_ATAC-seq_mapping_summary.txt
 
 ###organize files
+rm ${basename}.sam
+rm ${basename}.spike.sam
+
 mkdir -p Bam_files
 mv ${basename}.pe.q10.rmdup.bam ./Bam_files
 
@@ -82,6 +85,7 @@ mv ${basename}.spike.rmdup.bed ./Bed_files
 
 mkdir -p BedGraph_files
 mv ${basename}.norm.sort.bg ./BedGraph_files
+mv ${basename}.bg ./BedGraph_files
 
 mkdir -p BigWig_files
 mv ${basename}.norm.bw ./BigWig_files
