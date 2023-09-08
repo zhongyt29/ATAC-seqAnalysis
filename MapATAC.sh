@@ -49,7 +49,7 @@ genomeCoverageBed -bg -split -i ${basename}.pe.q10.rmdup.cut.bed -g /share/Genom
 
 ##### normalize #####
 bowtie2 -p $threads -X 2000 --very-sensitive -x /share/Genomes/${spike_in}/bowtie2/${spike_in} -1 ${file1base}.trim.fastq -2 ${file2base}.trim.fastq -S ${basename}.spike.sam >> ${basename}_ATAC-seq_mapping_summary.txt 2>&1
-samtools view -Sb ${basename}.spike.sam  > ${basename}.spike.bam
+samtools view -Sb ${basename}.spike.sam |samtools sort -o ${basename}.spike.bam
 picard MarkDuplicates INPUT=${basename}.spike.bam \
 OUTPUT=${basename}.spike.rmdup.bam \
 METRICS_FILE=${basename}.spike.Picard_Metrics_unfiltered_bam.txt REMOVE_DUPLICATES=true >> ${basename}_ATAC-seq_mapping_summary.txt 2>&1
